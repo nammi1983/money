@@ -1,64 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Decision Maker</title>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+  <title>AI Money-Earning Assistant</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" />
+  <style>
+    body {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+    .box {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    .small-btn {
+      font-size: 0.75rem;
+      padding: 4px 8px;
+    }
+    .action-buttons {
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    .dropdown button {
+      font-size: 0.85rem;
+      padding: 5px 8px;
+    }
+  </style>
 </head>
 <body>
-    <h1>AI Decision Maker</h1>
-
-    <!-- Training Tab -->
-    <div>
-        <h2>Training</h2>
-        <button onclick="trainModel()">Train Model</button>
-        <button onclick="plotStockData()">Plot Stock Data</button>
-        <div id="plot"></div>
+  <div class="container box">
+    <div class="row">
+      <div class="col-12 d-flex flex-column align-items-center">
+        <form id="platformForm" class="d-flex mb-2">
+          <input type="text" id="platformInput" class="form-control small-input me-2" placeholder="Platform" />
+          <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        <div class="action-buttons d-flex flex-wrap">
+          <div class="dropdown me-2">
+            <button class="btn btn-success dropdown-toggle small-btn" type="button" id="autoInvestDropdown" data-bs-toggle="dropdown" aria-expanded="false">Auto Invest</button>
+            <ul class="dropdown-menu" aria-labelledby="autoInvestDropdown">
+              <li><a class="dropdown-item" href="https://www.robinhood.com" target="_blank">Robinhood</a></li>
+              <li><a class="dropdown-item" href="https://www.etrade.com" target="_blank">E*Trade</a></li>
+              <li><a class="dropdown-item" href="https://www.tdameritrade.com" target="_blank">TD Ameritrade</a></li>
+            </ul>
+          </div>
+          <div class="dropdown me-2">
+            <button class="btn btn-secondary dropdown-toggle small-btn" type="button" id="ecommerceDropdown" data-bs-toggle="dropdown" aria-expanded="false">E-commerce</button>
+            <ul class="dropdown-menu" aria-labelledby="ecommerceDropdown">
+              <li><a class="dropdown-item" href="https://www.shopify.com" target="_blank">Shopify</a></li>
+              <li><a class="dropdown-item" href="https://www.bigcommerce.com" target="_blank">BigCommerce</a></li>
+              <li><a class="dropdown-item" href="https://woocommerce.com" target="_blank">WooCommerce</a></li>
+            </ul>
+          </div>
+          <div class="dropdown me-2">
+            <button class="btn btn-dark dropdown-toggle small-btn" type="button" id="aiTradingDropdown" data-bs-toggle="dropdown" aria-expanded="false">AI Trading</button>
+            <ul class="dropdown-menu" aria-labelledby="aiTradingDropdown">
+              <li><a class="dropdown-item" href="https://www.etoro.com" target="_blank">eToro</a></li>
+              <li><a class="dropdown-item" href="https://www.robinhood.com" target="_blank">Robinhood</a></li>
+              <li><a class="dropdown-item" href="https://www.interactivebrokers.com" target="_blank">Interactive Brokers</a></li>
+              <!-- Added more AI trading apps -->
+              <li><a class="dropdown-item" href="https://www.cryptohopper.com" target="_blank">CryptoHopper</a></li>
+              <li><a class="dropdown-item" href="https://www.tradewave.net" target="_blank">TradeWave</a></li>
+              <li><a class="dropdown-item" href="https://www.3commas.io" target="_blank">3Commas</a></li>
+              <li><a class="dropdown-item" href="https://www.zenbot.org" target="_blank">Zenbot</a></li>
+              <li><a class="dropdown-item" href="https://www.cinchapi.com" target="_blank">Cinchapi AI</a></li>
+              <li><a class="dropdown-item" href="https://www.tradingview.com" target="_blank">TradingView</a></li>
+            </ul>
+          </div>
+          <div class="dropdown me-2">
+            <button class="btn btn-warning dropdown-toggle small-btn" type="button" id="freelanceDropdown" data-bs-toggle="dropdown" aria-expanded="false">Freelance Work</button>
+            <ul class="dropdown-menu" aria-labelledby="freelanceDropdown">
+              <li><a class="dropdown-item" href="https://www.fiverr.com" target="_blank">Fiverr</a></li>
+              <li><a class="dropdown-item" href="https://www.upwork.com" target="_blank">Upwork</a></li>
+              <li><a class="dropdown-item" href="https://www.freelancer.com" target="_blank">Freelancer</a></li>
+            </ul>
+          </div>
+          <div class="dropdown me-2">
+            <button class="btn btn-danger dropdown-toggle small-btn" type="button" id="affiliateDropdown" data-bs-toggle="dropdown" aria-expanded="false">Affiliate Marketing</button>
+            <ul class="dropdown-menu" aria-labelledby="affiliateDropdown">
+              <li><a class="dropdown-item" href="https://affiliate-program.amazon.com" target="_blank">Amazon Associates</a></li>
+              <li><a class="dropdown-item" href="https://www.clickbank.com" target="_blank">ClickBank</a></li>
+              <li><a class="dropdown-item" href="https://www.cj.com" target="_blank">CJ Affiliate</a></li>
+            </ul>
+          </div>
+          <!-- Betting Dropdown with Casino Apps Added -->
+          <div class="dropdown me-2">
+            <button class="btn btn-warning dropdown-toggle small-btn" type="button" id="bettingDropdown" data-bs-toggle="dropdown" aria-expanded="false">Betting</button>
+            <ul class="dropdown-menu" aria-labelledby="bettingDropdown">
+              <li><a class="dropdown-item" href="https://www.bet365.com" target="_blank">Bet365</a></li>
+              <li><a class="dropdown-item" href="https://www.unibet.com" target="_blank">Unibet</a></li>
+              <li><a class="dropdown-item" href="https://www.paddypower.com" target="_blank">Paddy Power</a></li>
+              <!-- Genium Betting Platform -->
+              <li><a class="dropdown-item" href="https://www.genium.com" target="_blank">Genium Betting</a></li>
+              <!-- Casino Apps Added Here -->
+              <li><a class="dropdown-item" href="https://www.888casino.com" target="_blank">888 Casino</a></li>
+              <li><a class="dropdown-item" href="https://www.betfaircasino.com" target="_blank">Betfair Casino</a></li>
+              <li><a class="dropdown-item" href="https://www.williamhill.com" target="_blank">William Hill Casino</a></li>
+              <li><a class="dropdown-item" href="https://www.mrgreen.com" target="_blank">Mr Green Casino</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <!-- Prediction Tab -->
-    <div>
-        <h2>Prediction</h2>
-        <input type="number" id="feature1" placeholder="Feature 1">
-        <input type="number" id="feature2" placeholder="Feature 2">
-        <button onclick="makePrediction()">Make Prediction</button>
-        <p id="prediction-result"></p>
-    </div>
-
-    <script>
-        async function trainModel() {
-            const response = await fetch("/train", { method: "POST" });
-            const result = await response.json();
-            alert(result.message);
-        }
-
-        async function makePrediction() {
-            const feature1 = document.getElementById("feature1").value;
-            const feature2 = document.getElementById("feature2").value;
-            const response = await fetch("/predict", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ feature1, feature2 }),
-            });
-            const result = await response.json();
-            document.getElementById("prediction-result").innerText = `Prediction: ${result.prediction}`;
-        }
-
-        async function plotStockData() {
-            const response = await fetch("/plot", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ symbol: "AAPL" }),
-            });
-            const result = await response.json();
-            const plotDiv = document.getElementById("plot");
-            Plotly.newPlot(plotDiv, [{
-                x: result.dates,
-                y: result.prices,
-                type: "line",
-            }]);
-        }
-    </script>
+  </div>
+  
+  <script>
+    function runBackgroundTasks() {
+      console.log("Background monitoring started...");
+    }
+    document.addEventListener("DOMContentLoaded", runBackgroundTasks);
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
